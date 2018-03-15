@@ -22,9 +22,20 @@ namespace TouchDemo
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        TranslateTransform dragTranslation;
         public MainPage()
         {
             this.InitializeComponent();
+
+            circle.ManipulationDelta += DragManipulationDela;
+            dragTranslation = new TranslateTransform();
+            circle.RenderTransform = this.dragTranslation;
+        }
+
+        private void DragManipulationDela(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            dragTranslation.X += e.Delta.Translation.X;
+            dragTranslation.Y += e.Delta.Translation.Y;
         }
     }
 }
